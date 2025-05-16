@@ -1,0 +1,47 @@
+* {
+  border: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 40px;
+  background-color: #151515;
+  font-family: 'franklin gothic medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h2 {
+  color: #f3f3f3;
+  text-align: center;
+  font-size: 48px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1024px;
+  margin: 0 auto;
+
+}
+
+.card {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  border: 1px solid #333
+}
+
+button {
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: monospace;
+  background-color: transparent;
+  width: 100%;
+  cursor: pointer;
+  color: #f3f3f3;
+}
