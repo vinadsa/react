@@ -1,7 +1,7 @@
 import MovieCard from './components/MovieCard.jsx';
 import Search from './components/search.jsx'
 import Spinner from './components/Spinner.jsx'
-import {useDebounce} from 'react-use'
+import {useDebounce, useRafState} from 'react-use'
 import { useEffect, useState } from "react"
 import { getTrendingMovies, updateSearchCount } from './appwrite.js';
 
@@ -23,9 +23,18 @@ const App = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
   const [trendingMovies, setTrendingMovies] = useState([])
 
+
   useDebounce(() => {
     setDebouncedSearchTerm(searchTerm)
   }, 750, [searchTerm])
+
+  useEffect(() => {
+    fetchMovies(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    loadTrendingMovies();
+  }, []);
 
   const loadTrendingMovies = async () => {
     try {
@@ -74,13 +83,6 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
-    fetchMovies(debouncedSearchTerm);
-  }, [debouncedSearchTerm]);
-
-  useEffect(() => {
-    loadTrendingMovies();
-  }, []);
 
   return(
     <main>
@@ -104,7 +106,10 @@ const App = () => {
               {trendingMovies.map((movie, index) => (
                 <li key={movie.$id}>
                   <p>{index + 1}</p>
-                  <img src={movie.poster_url} alt={movie.title} />
+                  <img 
+                    src={movie.poster_url === 'https://image.tmdb.org/t/p/w500null' ? '/No-Poster-1.png' : movie.poster_url} 
+                    alt={movie.title} 
+                  />
                 </li>
               ))}
             </ul>

@@ -28,6 +28,7 @@ export const updateSearchCount = async (searchTerm, movie) => {
 
         //3. kalo gada, bikin record atau dokumen baru dgn search term dan count set as 1
         } else { 
+            const url = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '/No-Poster-1.png';
             await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
                 searchTerm,
                 count: 1,
